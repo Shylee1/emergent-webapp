@@ -41,8 +41,9 @@ NeurusAGi is artificial general intelligence.
             className="mt-4 max-w-2xl text-pretty text-base text-white/70 md:text-lg"
             data-testid="landing-hero-subtitle"
           >
-            A global-first platform designed to present AGI with the magnitude it deserves. News, research,
-            investor outreach, and a next-generation experience engineered for maximum wow factor.
+            NeurusAGi is a new class of intelligence: a quantum-powered AGI agent built to reason, discover,
+            and execute with precision. This interface is the public signal layer—news, research, and direct
+            access pathways.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row" data-testid="landing-hero-cta">
