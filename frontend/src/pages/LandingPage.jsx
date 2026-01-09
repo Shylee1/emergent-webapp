@@ -62,6 +62,27 @@ NeurusAGi is artificial general intelligence.
         </div>
       </section>
 
+      <section className="space-y-4" data-testid="landing-reports-section">
+        <div className="flex items-end justify-between gap-3" data-testid="landing-reports-header">
+          <h2 className="text-2xl font-semibold tracking-tight" data-testid="landing-reports-title">
+            Technical reporting
+          </h2>
+          <div className="text-xs text-white/60" data-testid="landing-reports-subtitle">
+            Reports + graphs showcased for credibility and depth
+          </div>
+        </div>
+
+        {/* High-effort report showcase */}
+        <div data-testid="landing-reports-showcase-wrapper">
+          {/* Lazy-loaded component to keep landing fast */}
+          {(() => {
+            // eslint-disable-next-line global-require
+            const ReportShowcase = require("@/components/ReportShowcase").default;
+            return <ReportShowcase />;
+          })()}
+        </div>
+      </section>
+
       <section className="grid gap-4 md:grid-cols-3" data-testid="landing-feature-grid">
         {[
           {
