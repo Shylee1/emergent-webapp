@@ -265,6 +265,13 @@ export default function NewsPage() {
           items={bottomRail}
           direction={-1}
           initialSpeed={65}
+          selectedSlug={selected?.slug}
+          onCardClickScrollTo={() => {
+            document.querySelector('[data-testid="news-center-panel"]')?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }}
           onSelect={(a) => setSelected(a)}
         />
       </section>
