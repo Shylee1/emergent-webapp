@@ -142,9 +142,7 @@ export default function NewsPage() {
           onCardClickScrollTo={() => {
             const el = document.querySelector('[data-testid="news-center-panel"]');
             if (!el) return;
-            const rect = el.getBoundingClientRect();
-            const inView = rect.top >= 0 && rect.top < window.innerHeight * 0.35;
-            if (inView) return;
+            // Always scroll on select (you chose option 1) so the user sees the expanded content.
             el.scrollIntoView({ behavior: "smooth", block: "start" });
           }}
           onSelect={(a) => setSelected(a)}
@@ -155,53 +153,54 @@ export default function NewsPage() {
           data-testid="news-center-panel"
         >
           <div
-            className="pointer-events-none absolute inset-0 -z-10 opacity-80"
+            className="pointer-events-none absolute inset-0 z-0 opacity-80"
             style={{
               background:
                 "radial-gradient(circle at 30% 20%, rgba(0,122,122,0.18), transparent 46%), radial-gradient(circle at 80% 70%, rgba(193,154,59,0.14), transparent 52%)",
             }}
           />
 
-          <div className="relative space-y-4" data-testid="news-center-panel-inner">
+          <div className="relative z-10 space-y-4" data-testid="news-center-panel-inner">
             <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
               <div className="flex-1" data-testid="news-search-bar">
-                <div className="flex items-center gap-2">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
                   <Input
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search titles + content..."
-                    className="h-11 rounded-xl border-white/10 bg-white/5 text-white placeholder:text-white/40"
+                    className="h-11 flex-1 rounded-xl border-white/10 bg-white/5 text-white placeholder:text-white/40"
                     data-testid="news-search-input"
                   />
-                  <Button
-                    variant="secondary"
-                    className="h-11 rounded-xl bg-white/10 text-white hover:bg-white/15"
-                    onClick={() => setQuery("")}
-                    data-testid="news-search-clear"
-                  >
-                    Clear
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="secondary"
+                      className="h-11 rounded-xl bg-white/10 text-white hover:bg-white/15"
+                      onClick={() => setQuery("")}
+                      data-testid="news-search-clear"
+                    >
+                      Clear
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      className="h-11 rounded-xl bg-white/10 text-white hover:bg-white/15"
+                      onClick={() => {
+                        if (!selected) return;
+                        const url = `${window.location.origin}/news?article=${selected.slug}`;
+                        navigator.clipboard?.writeText(url);
+                      }}
+                      data-testid="news-copy-link"
+                      disabled={!selected}
+                    >
+                      Copy link
+                    </Button>
+                  </div>
                 </div>
                 <div className="mt-2 text-xs text-white/60" data-testid="news-search-meta">
                   Showing <span className="text-white/80">{filtered.length}</span> articles
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-2" data-testid="news-expanded-actions">
-                <Button
-                  variant="secondary"
-                  className="h-11 rounded-xl bg-white/10 text-white hover:bg-white/15"
-                  onClick={() => {
-                    if (!selected) return;
-                    const url = `${window.location.origin}/news?article=${selected.slug}`;
-                    navigator.clipboard?.writeText(url);
-                  }}
-                  data-testid="news-copy-link"
-                  disabled={!selected}
-                >
-                  Copy link
-                </Button>
-              </div>
+              <div className="hidden" data-testid="news-expanded-actions" />
             </div>
 
             <div className="space-y-2" data-testid="news-expanded-header">
@@ -255,9 +254,7 @@ export default function NewsPage() {
           onCardClickScrollTo={() => {
             const el = document.querySelector('[data-testid="news-center-panel"]');
             if (!el) return;
-            const rect = el.getBoundingClientRect();
-            const inView = rect.top >= 0 && rect.top < window.innerHeight * 0.35;
-            if (inView) return;
+            // Always scroll on select (you chose option 1) so the user sees the expanded content.
             el.scrollIntoView({ behavior: "smooth", block: "start" });
           }}
           onSelect={(a) => setSelected(a)}
