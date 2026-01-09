@@ -52,9 +52,14 @@ function TopNav() {
                 [
                   "rounded-xl px-3 py-2 text-sm transition",
                   isActive
-                    ? "bg-cyan-500/15 text-cyan-200 shadow-[0_0_0_1px_rgba(34,211,238,0.25)]"
+                    ? "text-white shadow-[0_0_0_1px_rgba(0,122,122,0.35)]"
                     : "text-white/70 hover:bg-white/5 hover:text-white",
                 ].join(" ")
+              }
+              style={
+                (location.pathname === item.to)
+                  ? { background: "rgba(0,122,122,0.12)" }
+                  : undefined
               }
               aria-current={location.pathname === item.to ? "page" : undefined}
             >
