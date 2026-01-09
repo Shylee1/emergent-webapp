@@ -203,10 +203,10 @@ export default function MarqueeRail({
                 style={{
                   background:
                     idx % 3 === 0
-                      ? "radial-gradient(circle at 30% 30%, rgba(34,211,238,0.25), transparent 55%), linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))"
+                      ? "radial-gradient(circle at 30% 30%, rgba(0,122,122,0.26), transparent 55%), linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))"
                       : idx % 3 === 1
-                        ? "radial-gradient(circle at 70% 30%, rgba(20,184,166,0.22), transparent 55%), linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))"
-                        : "radial-gradient(circle at 50% 30%, rgba(234,88,12,0.18), transparent 55%), linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))",
+                        ? "radial-gradient(circle at 70% 30%, rgba(0,155,150,0.22), transparent 55%), linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))"
+                        : "radial-gradient(circle at 50% 30%, rgba(193,154,59,0.18), transparent 55%), linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))",
                 }}
                 data-testid={`${railId}-marquee-item-bg-${item.slug}`}
               />
