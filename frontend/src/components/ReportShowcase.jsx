@@ -28,7 +28,7 @@ const reports = [
   },
   {
     id: "mega-5",
-    title: "Technical Mega-Report - Part 5",
+    title: "NeurusAGi Technical Mega-Report - Part 5",
     path: "/reports/mega-report-part-5.md",
   },
   {
