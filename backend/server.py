@@ -73,7 +73,7 @@ async def create_waitlist_entry(input: WaitlistEntryCreate):
     # Basic validation + sanitization (standard users only; exec UI can bypass later)
     email = _clean_text(input.email or "", 200)
     if "@" not in email or "." not in email:
-        return {"error": "Invalid email"}
+        raise HTTPException(status_code=400, detail="Invalid email")
 
     entry = WaitlistEntry(
         name=_clean_text(input.name),
