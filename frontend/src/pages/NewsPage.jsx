@@ -296,7 +296,7 @@ export default function NewsPage() {
                   {selected?.title ?? "Select an article"}
                 </h3>
                 <div className="text-xs text-white/60" data-testid="news-expanded-meta">
-                  {selected ? `Article #${selected.num}` : ""}
+                  {selected?.dateLabel ? selected.dateLabel : ""}
                 </div>
               </div>
 
