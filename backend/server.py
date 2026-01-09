@@ -69,9 +69,9 @@ def _clean_text(v: str, max_len: int = 160) -> str:
 @api_router.post("/waitlist", response_model=WaitlistEntry)
 async def create_waitlist_entry(input: WaitlistEntryCreate):
     # Basic validation + sanitization (standard users only; exec UI can bypass later)
-    email = _clean_text(input.email, 200)
+    email = _clean_text(input.email or "", 200)
     if "@" not in email or "." not in email:
-        raise ValueError("Invalid email")
+        return {"error": "Invalid email"}
 
     entry = WaitlistEntry(
         name=_clean_text(input.name),
