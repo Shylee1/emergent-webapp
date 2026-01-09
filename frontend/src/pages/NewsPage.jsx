@@ -2,7 +2,6 @@ import React, { useMemo, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MarqueeRail from "@/components/MarqueeRail";
 import articles from "@/data/articles.json";
 
@@ -53,8 +52,8 @@ export default function NewsPage() {
       .map((x) => x.a);
   }, [query]);
 
-  const topRail = filtered.filter((_, idx) => idx % 2 === 0);
-  const bottomRail = filtered.filter((_, idx) => idx % 2 === 1);
+  const topRail = filtered;
+  const bottomRail = filtered;
 
   return (
     <div className="space-y-10" data-testid="news-page">
@@ -160,7 +159,7 @@ export default function NewsPage() {
         </div>
       </section>
 
-      {/* Dual marquee + search + expansion */}
+      {/* Dual marquee + search + expansion (article expands BETWEEN the marquees) */}
       <section className="space-y-6" data-testid="news-marquee-section">
         <MarqueeRail
           railId="top"
@@ -170,91 +169,47 @@ export default function NewsPage() {
           onSelect={(a) => setSelected(a)}
         />
 
-        <div className="grid gap-4 lg:grid-cols-5" data-testid="news-search-row">
-          <div className="lg:col-span-3" data-testid="news-search-bar">
-            <div className="flex items-center gap-2">
-              <Input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search titles + content…"
-                className="h-11 rounded-xl border-white/10 bg-white/5 text-white placeholder:text-white/40"
-                data-testid="news-search-input"
-              />
-              <Button
-                variant="secondary"
-                className="h-11 rounded-xl bg-white/10 text-white hover:bg-white/15"
-                onClick={() => setQuery("")}
-                data-testid="news-search-clear"
-              >
-                Clear
-              </Button>
-            </div>
-            <div className="mt-2 text-xs text-white/60" data-testid="news-search-meta">
-              Showing <span className="text-white/80">{filtered.length}</span> articles
-            </div>
-          </div>
-
-          <div className="lg:col-span-2" data-testid="news-selected-meta">
-            <Card className="rounded-2xl border-white/10 bg-black/30 p-4">
-              <div className="text-xs text-white/60" data-testid="news-selected-label">
-                Selected
-              </div>
-              <div className="mt-1 text-sm font-semibold" data-testid="news-selected-title">
-                {selected?.title ?? "None"}
-              </div>
-              <div className="mt-1 text-xs text-white/60" data-testid="news-selected-sub">
-                {selected?.dateLabel ? selected.dateLabel : "Pick an article from the streams"}
-              </div>
-              {selected?.isPosted ? (
-                <div className="mt-2 text-xs text-white/60" data-testid="news-selected-posted-flag">
-                  Marked as posted externally.
-                </div>
-              ) : null}
-            </Card>
-          </div>
-        </div>
-
-        <MarqueeRail
-          railId="bottom"
-          items={bottomRail}
-          direction={-1}
-          initialSpeed={65}
-          onSelect={(a) => setSelected(a)}
-        />
-
         <Card
-          className="relative overflow-hidden rounded-3xl border-white/10 bg-white/5 p-6"
-          data-testid="news-article-expansion"
+          className="relative overflow-hidden rounded-3xl border-white/10 bg-white/5 p-5"
+          data-testid="news-center-panel"
         >
           <div
-            className="pointer-events-none absolute inset-0 opacity-60"
+            className="pointer-events-none absolute inset-0 opacity-70"
             style={{
               background:
-                "radial-gradient(circle at 30% 20%, rgba(34,211,238,0.12), transparent 45%), radial-gradient(circle at 80% 70%, rgba(234,88,12,0.10), transparent 50%)",
+                "radial-gradient(circle at 30% 20%, rgba(0,122,122,0.14), transparent 45%), radial-gradient(circle at 80% 70%, rgba(193,154,59,0.10), transparent 50%)",
             }}
           />
 
-          <div className="relative">
-            <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-              <div className="space-y-1">
-                <div
-                  className="text-xs font-medium tracking-wide text-white/60"
-                  data-testid="news-expanded-kicker"
-                >
-                  Expanded Article
+          <div className="relative space-y-4" data-testid="news-center-panel-inner">
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex-1" data-testid="news-search-bar">
+                <div className="flex items-center gap-2">
+                  <Input
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search titles + content..."
+                    className="h-11 rounded-xl border-white/10 bg-white/5 text-white placeholder:text-white/40"
+                    data-testid="news-search-input"
+                  />
+                  <Button
+                    variant="secondary"
+                    className="h-11 rounded-xl bg-white/10 text-white hover:bg-white/15"
+                    onClick={() => setQuery("")}
+                    data-testid="news-search-clear"
+                  >
+                    Clear
+                  </Button>
                 </div>
-                <h3 className="text-xl font-semibold" data-testid="news-expanded-title">
-                  {selected?.title ?? "Select an article"}
-                </h3>
-                <div className="text-xs text-white/60" data-testid="news-expanded-meta">
-                  {selected?.dateLabel ? selected.dateLabel : ""}
+                <div className="mt-2 text-xs text-white/60" data-testid="news-search-meta">
+                  Showing <span className="text-white/80">{filtered.length}</span> articles
                 </div>
               </div>
 
               <div className="flex flex-wrap gap-2" data-testid="news-expanded-actions">
                 <Button
                   variant="secondary"
-                  className="rounded-xl bg-white/10 text-white hover:bg-white/15"
+                  className="h-11 rounded-xl bg-white/10 text-white hover:bg-white/15"
                   onClick={() => {
                     if (!selected) return;
                     const url = `${window.location.origin}/news?article=${selected.slug}`;
@@ -265,107 +220,48 @@ export default function NewsPage() {
                 >
                   Copy link
                 </Button>
-                <Button
-                  variant="secondary"
-                  className="rounded-xl bg-white/10 text-white hover:bg-white/15"
-                  onClick={() => setSelected(null)}
-                  data-testid="news-deselect"
-                  disabled={!selected}
-                >
-                  Deselect
-                </Button>
               </div>
             </div>
 
-            <div className="mt-5 grid gap-5 lg:grid-cols-5" data-testid="news-expanded-body">
-              <div className="lg:col-span-3" data-testid="news-expanded-text">
-                <div
-                  className="max-h-[420px] overflow-auto rounded-2xl border border-white/10 bg-black/20 p-4"
-                  data-testid="news-expanded-scroll"
-                >
-                  <div className="prose prose-invert max-w-none prose-p:text-white/80 prose-headings:text-white">
-                    {(selected?.full_content ?? "")
-                      .split("\n\n")
-                      .filter(Boolean)
-                      .map((p, idx) => (
-                        <p key={idx} data-testid={`news-expanded-paragraph-${idx}`}>
-                          {p}
-                        </p>
-                      ))}
-                  </div>
-                </div>
-
-                {selected?.isPosted ? (
-                  <div
-                    className="mt-4 rounded-2xl border border-white/10 bg-black/30 p-4 text-xs text-white/70"
-                    data-testid="news-expanded-posted-note"
-                  >
-                    This item is marked as already posted externally and will not appear in the marquee selection.
-                  </div>
-                ) : null}
+            <div className="space-y-2" data-testid="news-expanded-header">
+              <div className="text-xs font-medium tracking-wide text-white/60" data-testid="news-expanded-kicker">
+                Expanded Article
               </div>
-
-              <div className="lg:col-span-2" data-testid="news-expanded-visuals">
-                <Tabs value={activeTab} onValueChange={setActiveTab} data-testid="news-visual-tabs">
-                  <TabsList
-                    className="grid w-full grid-cols-3 rounded-xl bg-white/10"
-                    data-testid="news-visual-tabs-list"
-                  >
-                    <TabsTrigger value="neur" data-testid="news-visual-tab-compute">
-                      Compute
-                    </TabsTrigger>
-                    <TabsTrigger value="evo" data-testid="news-visual-tab-evolution">
-                      Evolution
-                    </TabsTrigger>
-                    <TabsTrigger value="zero" data-testid="news-visual-tab-zeroshot">
-                      Zero-shot
-                    </TabsTrigger>
-                  </TabsList>
-
-                  <TabsContent value="neur" data-testid="news-visual-tabpanel-compute">
-                    <Card className="mt-3 overflow-hidden rounded-2xl border-white/10 bg-black/30">
-                      <img
-                        src="/neurusagi_compute_graph_v3.png"
-                        alt="AI Compute Graph"
-                        className="w-full"
-                        data-testid="news-visual-compute-image"
-                      />
-                    </Card>
-                  </TabsContent>
-
-                  <TabsContent value="evo" data-testid="news-visual-tabpanel-evolution">
-                    <Card className="mt-3 overflow-hidden rounded-2xl border-white/10 bg-black/30">
-                      <img
-                        src="/neurusagi_evolution_dynamics.png"
-                        alt="Intelligence evolution dynamics"
-                        className="w-full"
-                        data-testid="news-visual-evolution-image"
-                      />
-                    </Card>
-                  </TabsContent>
-
-                  <TabsContent value="zero" data-testid="news-visual-tabpanel-zeroshot">
-                    <Card className="mt-3 overflow-hidden rounded-2xl border-white/10 bg-black/30">
-                      <img
-                        src="/neurusagi_zeroshot_discovery2.png"
-                        alt="Zero-shot discovery"
-                        className="w-full"
-                        data-testid="news-visual-zeroshot-image"
-                      />
-                    </Card>
-                  </TabsContent>
-                </Tabs>
-
-                <div
-                  className="mt-4 rounded-2xl border border-white/10 bg-black/30 p-4 text-xs text-white/70"
-                  data-testid="news-visuals-note"
-                >
-                  Visuals pulled from NeurusAGi technical reporting. Color palette matches NeurusAGi branding.
+              <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between">
+                <h3 className="text-xl font-semibold" data-testid="news-expanded-title">
+                  {selected?.title ?? "Select an article"}
+                </h3>
+                <div className="text-xs text-white/60" data-testid="news-expanded-meta">
+                  {selected?.dateLabel ? selected.dateLabel : ""}
                 </div>
+              </div>
+            </div>
+
+            <div
+              className="max-h-[420px] overflow-auto rounded-2xl border border-white/10 bg-black/20 p-4"
+              data-testid="news-expanded-scroll"
+            >
+              <div className="prose prose-invert max-w-none prose-p:text-white/80 prose-headings:text-white">
+                {(selected?.full_content ?? "")
+                  .split("\n\n")
+                  .filter(Boolean)
+                  .map((p, idx) => (
+                    <p key={idx} data-testid={`news-expanded-paragraph-${idx}`}>
+                      {p}
+                    </p>
+                  ))}
               </div>
             </div>
           </div>
         </Card>
+
+        <MarqueeRail
+          railId="bottom"
+          items={bottomRail}
+          direction={-1}
+          initialSpeed={65}
+          onSelect={(a) => setSelected(a)}
+        />
       </section>
 
       {/* 3rd party section */}
