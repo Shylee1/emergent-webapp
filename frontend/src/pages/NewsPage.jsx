@@ -26,9 +26,18 @@ export default function NewsPage() {
   const [selected, setSelected] = useState(() => articles?.[0] ?? null);
   const [activeTab, setActiveTab] = useState("neur");
 
+  // Exclude articles that are marked as already posted.
+  // The source file includes markers like "posted" / "LinkedIn" / "YouTube" near the title.
+  const curated = useMemo(() => {
+    const base = Array.isArray(articles) ? articles : [];
+    return base
+      .filter((a) => !a.isPosted)
+      .filter((a) => !String(a.slug || "").includes("pending"));
+  }, []);
+
   const filtered = useMemo(() => {
     const q = query.trim();
-    if (!q) return articles;
+    if (!q) return curated;
 
     return [...articles]
       .map((a) => {
