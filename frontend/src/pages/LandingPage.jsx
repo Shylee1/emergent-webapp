@@ -42,7 +42,7 @@ NeurusAGi is artificial general intelligence.
             data-testid="landing-hero-subtitle"
           >
             NeurusAGi is a new class of intelligence: a quantum-powered AGI agent built to reason, discover,
-            and execute with precision. This interface is the public signal layer—news, research, and direct
+            and execute with precision. This interface is the public signal layer - news, research, and direct
             access pathways.
           </p>
 
