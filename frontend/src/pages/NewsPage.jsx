@@ -92,12 +92,16 @@ export default function NewsPage() {
               NeurusAGi News
             </h1>
             <p className="mt-3 text-sm text-white/70" data-testid="news-subtitle">
-              Major announcements, one featured video, and the dual-marquee selector. Search between rails,
-              pick an article, and expand it instantly.
+              Announcements, media drops, and full articles.
             </p>
 
-            <div className="mt-5" data-testid="news-announcement-cards">
-              {/* Intentionally minimal (no filler "notes" boxes). */}
+            <div className="mt-5 flex flex-col gap-3" data-testid="news-announcements-cta">
+              <div className="text-xs text-white/60" data-testid="news-waitlist-hint">
+                Get notified at launch.
+              </div>
+              <div className="flex flex-wrap gap-2" data-testid="news-waitlist-actions">
+                <WaitlistDialog />
+              </div>
             </div>
           </div>
 
