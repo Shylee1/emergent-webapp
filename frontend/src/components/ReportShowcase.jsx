@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const reports = [
   {
     id: "mega-1",
-    title: "Technical Mega-Report - Part 1",
+    title: "NeurusAGi Technical Mega-Report - Part 1",
     path: "/reports/mega-report-part-1.md",
   },
   {
