@@ -39,7 +39,7 @@ export default function NewsPage() {
     const q = query.trim();
     if (!q) return curated;
 
-    return [...articles]
+    return [...curated]
       .map((a) => {
         const hay = `${a.title}\n${a.first_paragraph}\n${a.full_content}`;
         return { a, s: scoreMatch(hay, q) };
