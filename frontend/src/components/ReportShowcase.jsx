@@ -75,7 +75,7 @@ export default function ReportShowcase() {
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div className="space-y-1" data-testid="report-showcase-header">
           <div className="text-xs font-medium tracking-wide text-white/60" data-testid="report-showcase-kicker">
-            Technical reporting
+            Reports
           </div>
           <div className="text-lg font-semibold" data-testid="report-showcase-title">
             {active.title}

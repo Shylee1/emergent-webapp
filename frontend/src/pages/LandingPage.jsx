@@ -6,7 +6,10 @@ import { Card } from "@/components/ui/card";
 export default function LandingPage() {
   return (
     <div className="space-y-10" data-testid="landing-page">
-      <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 md:p-12">
+      <section
+        className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 md:p-12"
+        data-testid="landing-hero"
+      >
         <div className="pointer-events-none absolute inset-0 opacity-70 [mask-image:radial-gradient(circle_at_40%_10%,black,transparent_60%)]">
           <div
             className="absolute -top-24 left-10 h-56 w-56 rounded-full blur-3xl"
@@ -18,46 +21,98 @@ export default function LandingPage() {
           />
         </div>
 
-        <div className="relative">
-          <div
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-xs text-white/80"
-            data-testid="landing-badge"
-          >
-            <span
-              className="h-2 w-2 rounded-full"
-              style={{ background: "#007A7A", boxShadow: "0 0 18px rgba(0,122,122,0.95)" }}
-              data-testid="landing-badge-dot"
-            />
-NeurusAGi is artificial general intelligence.
+        <div className="relative grid gap-10 lg:grid-cols-5" data-testid="landing-hero-grid">
+          <div className="lg:col-span-3" data-testid="landing-hero-left">
+            <div
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/50 px-4 py-2 text-xs text-white/80"
+              data-testid="landing-badge"
+            >
+              <span
+                className="h-2 w-2 rounded-full"
+                style={{ background: "#007A7A", boxShadow: "0 0 18px rgba(0,122,122,0.95)" }}
+                data-testid="landing-badge-dot"
+              />
+              NeurusAGi is artificial general intelligence.
+            </div>
+
+            <h1
+              className="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-6xl"
+              data-testid="landing-hero-title"
+            >
+              A quantum leap in intelligence.
+            </h1>
+
+            <p
+              className="mt-4 max-w-2xl text-pretty text-base text-white/70 md:text-lg"
+              data-testid="landing-hero-subtitle"
+            >
+              NeurusAGi is a quantum-powered AGI agent built to reason, discover, and execute with precision.
+              Subscribe for access. This site is the public signal layer.
+            </p>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row" data-testid="landing-hero-cta">
+              <Button asChild className="rounded-xl" data-testid="landing-cta-news">
+                <Link to="/news">Open News</Link>
+              </Button>
+              <Button
+                asChild
+                variant="secondary"
+                className="rounded-xl bg-white/10 text-white hover:bg-white/15"
+                data-testid="landing-cta-about"
+              >
+                <Link to="/about">Read the thesis</Link>
+              </Button>
+            </div>
+
+            <div className="mt-7 grid gap-3 sm:grid-cols-3" data-testid="landing-hero-metrics">
+              {[
+                { k: "Capability", v: "Reasoning + execution" },
+                { k: "Scope", v: "Every industry" },
+                { k: "Access", v: "Subscription" },
+              ].map((x) => (
+                <Card
+                  key={x.k}
+                  className="rounded-2xl border-white/10 bg-black/30 p-4"
+                  data-testid={`landing-metric-${x.k.toLowerCase()}`}
+                >
+                  <div className="text-[11px] text-white/60" data-testid="landing-metric-key">
+                    {x.k}
+                  </div>
+                  <div className="mt-1 text-sm font-semibold" data-testid="landing-metric-value">
+                    {x.v}
+                  </div>
+                </Card>
+              ))}
+            </div>
           </div>
 
-          <h1
-            className="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-6xl"
-            data-testid="landing-hero-title"
-          >
-            A quantum leap in intelligence.
-          </h1>
-          <p
-            className="mt-4 max-w-2xl text-pretty text-base text-white/70 md:text-lg"
-            data-testid="landing-hero-subtitle"
-          >
-            NeurusAGi is a new class of intelligence: a quantum-powered AGI agent built to reason, discover,
-            and execute with precision. This interface is the public signal layer - news, research, and direct
-            access pathways.
-          </p>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row" data-testid="landing-hero-cta">
-            <Button asChild className="rounded-xl" data-testid="landing-cta-news">
-              <Link to="/news">Enter News</Link>
-            </Button>
-            <Button
-              asChild
-              variant="secondary"
-              className="rounded-xl bg-white/10 text-white hover:bg-white/15"
-              data-testid="landing-cta-about"
+          <div className="lg:col-span-2" data-testid="landing-hero-right">
+            <div
+              className="relative aspect-square w-full overflow-hidden rounded-3xl border border-white/10 bg-black/40"
+              data-testid="landing-hero-orb-card"
             >
-              <Link to="/about">Why NeurusAGi</Link>
-            </Button>
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "radial-gradient(circle at 30% 20%, rgba(0,122,122,0.22), transparent 55%), radial-gradient(circle at 70% 60%, rgba(193,154,59,0.16), transparent 58%), radial-gradient(circle at 50% 50%, rgba(255,255,255,0.06), transparent 55%)",
+                }}
+              />
+              <div className="absolute inset-0 opacity-[0.12] [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:32px_32px]" />
+              <div className="absolute inset-0 flex items-end p-5">
+                <div className="space-y-1">
+                  <div className="text-xs text-white/60" data-testid="landing-hero-orb-kicker">
+                    NeurusAGi
+                  </div>
+                  <div className="text-sm font-semibold" data-testid="landing-hero-orb-title">
+                    Signal layer
+                  </div>
+                  <div className="text-xs text-white/60" data-testid="landing-hero-orb-subtitle">
+                    Reports, graphs, and verified drops
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
