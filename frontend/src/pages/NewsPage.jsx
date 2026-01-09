@@ -6,8 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MarqueeRail from "@/components/MarqueeRail";
 import articles from "@/data/articles.json";
 
-const YT_MAIN = "https://www.youtube.com/embed/p6K4E1OlxrU";
-const YT_ANNOUNCEMENTS = "https://www.youtube.com/embed/NdvjA5NLREE";
+const YT_NEWS = "https://www.youtube.com/embed/NdvjA5NLREE";
 
 function scoreMatch(haystack, needle) {
   if (!needle) return 1;
