@@ -10,8 +10,9 @@ function clamp(n, min, max) {
 function wrapOffset(next, el, repeatCount) {
   const track = el?.querySelector?.("[data-marquee-track]");
   const trackWidth = track?.scrollWidth ?? 0;
-  const cycleWidth = repeatCount ? trackWidth / repeatCount : trackWidth;
-  if (!cycleWidth || !Number.isFinite(cycleWidth)) return next;
+  const safeRepeats = Number.isFinite(repeatCount) && repeatCount > 0 ? repeatCount : 1;
+  const cycleWidth = trackWidth / safeRepeats;
+  if (!cycleWidth || !Number.isFinite(cycleWidth)) return 0;
   return ((next % cycleWidth) + cycleWidth) % cycleWidth;
 }
 
@@ -213,7 +214,7 @@ export default function MarqueeRail({
               data-marquee-card
               onClick={() => {
                 // clone so state always updates reliably
-                onSelect?.({ ...item });
+                onSelect?.({ ...item, slug: item?.slug ?? "" });
                 onCardClickScrollTo?.();
               }}
               className={cn(
