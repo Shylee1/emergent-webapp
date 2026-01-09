@@ -67,6 +67,10 @@ def _clean_text(v: str, max_len: int = 160) -> str:
     if not isinstance(v, str):
         return ""
     v = re.sub(r"<[^>]*>", "", v)
+    v = re.sub(r"[\x00-\x1F\x7F]", "", v)
+    v = v.strip()
+    return v[:max_len]
+
 
 @api_router.post("/waitlist", response_model=WaitlistEntry)
 async def create_waitlist_entry(input: WaitlistEntryCreate):
