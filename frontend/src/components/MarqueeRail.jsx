@@ -7,6 +7,14 @@ function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
 }
 
+function wrapOffset(next, el, repeatCount) {
+  const track = el?.querySelector?.("[data-marquee-track]");
+  const trackWidth = track?.scrollWidth ?? 0;
+  const cycleWidth = repeatCount ? trackWidth / repeatCount : trackWidth;
+  if (!cycleWidth || !Number.isFinite(cycleWidth)) return next;
+  return ((next % cycleWidth) + cycleWidth) % cycleWidth;
+}
+
 /**
  * A controllable marquee that supports:
  * - auto-scroll (requestAnimationFrame)
@@ -58,13 +66,7 @@ export default function MarqueeRail({
       if (isPlaying && !isDragging) {
         setOffset((prev) => {
           const next = prev + dir * speed * dt;
-          const track = el.querySelector("[data-marquee-track]");
-          const trackWidth = track?.scrollWidth ?? 0;
-          // Wrap the offset by a single cycle width so it never "ends".
-          const cycleWidth = repeatCount ? trackWidth / repeatCount : trackWidth;
-          if (!cycleWidth || !Number.isFinite(cycleWidth)) return next;
-          const wrapped = ((next % cycleWidth) + cycleWidth) % cycleWidth;
-          return wrapped;
+          return wrapOffset(next, el, repeatCount);
         });
       }
 
@@ -110,14 +112,18 @@ export default function MarqueeRail({
 
   const onPointerMove = (e) => {
     if (!isDragging) return;
+    const el = viewportRef.current;
     const dx = e.clientX - dragRef.current.startX;
     // natural drag: move content with pointer
-    setOffset(dragRef.current.startOffset + -dx);
+    const next = dragRef.current.startOffset + -dx;
+    setOffset(wrapOffset(next, el, repeatCount));
   };
 
   const onPointerUp = (e) => {
     const el = viewportRef.current;
     el?.releasePointerCapture?.(e.pointerId);
+    // normalize offset on release so we stay inside the loop range
+    setOffset((prev) => wrapOffset(prev, el, repeatCount));
     setIsDragging(false);
   };
 

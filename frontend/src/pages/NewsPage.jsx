@@ -175,7 +175,7 @@ export default function NewsPage() {
         />
 
         <Card
-          className="relative overflow-hidden rounded-3xl border-white/10 bg-white/5 p-5 lg:sticky lg:top-[92px]"
+          className="relative overflow-hidden rounded-3xl border-white/10 bg-white/5 p-5 lg:sticky lg:top-[92px] backdrop-blur-xl"
           data-testid="news-center-panel"
         >
           <div
@@ -243,7 +243,7 @@ export default function NewsPage() {
             </div>
 
             <div
-              className="max-h-[420px] overflow-auto rounded-2xl border border-white/10 bg-black/20 p-4"
+              className="max-h-[420px] overflow-auto rounded-2xl border border-white/10 bg-black/35 p-4 shadow-[inset_0_0_0_1px_rgba(0,122,122,0.18)]"
               data-testid="news-expanded-scroll"
             >
               <div className="prose prose-invert max-w-none prose-p:text-white/80 prose-headings:text-white">
