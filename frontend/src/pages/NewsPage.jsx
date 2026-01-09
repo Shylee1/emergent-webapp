@@ -95,34 +95,8 @@ export default function NewsPage() {
               pick an article, and expand it instantly.
             </p>
 
-            <div className="mt-5 space-y-3" data-testid="news-announcement-cards">
-              {[
-                {
-                  title: "Major announcement",
-                  body: "Primary updates and milestone drops.",
-                },
-                {
-                  title: "Featured video",
-                  body: "Single embed only (per your spec).",
-                },
-                {
-                  title: "Article selection",
-                  body: "Choose from either marquee and read in the center panel.",
-                },
-              ].map((x) => (
-                <Card
-                  key={x.title}
-                  className="rounded-2xl border-white/10 bg-black/30 p-4"
-                  data-testid={`news-announcement-card-${x.title.toLowerCase().replace(/\s+/g, "-")}`}
-                >
-                  <div className="text-sm font-semibold" data-testid="news-announcement-card-title">
-                    {x.title}
-                  </div>
-                  <div className="mt-1 text-xs text-white/65" data-testid="news-announcement-card-body">
-                    {x.body}
-                  </div>
-                </Card>
-              ))}
+            <div className="mt-5" data-testid="news-announcement-cards">
+              {/* Intentionally minimal (no filler "notes" boxes). */}
             </div>
           </div>
 
@@ -166,10 +140,12 @@ export default function NewsPage() {
           initialSpeed={70}
           selectedSlug={selected?.slug}
           onCardClickScrollTo={() => {
-            document.querySelector('[data-testid="news-center-panel"]')?.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
+            const el = document.querySelector('[data-testid="news-center-panel"]');
+            if (!el) return;
+            const rect = el.getBoundingClientRect();
+            const inView = rect.top >= 0 && rect.top < window.innerHeight * 0.35;
+            if (inView) return;
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
           }}
           onSelect={(a) => setSelected(a)}
         />
@@ -269,10 +245,12 @@ export default function NewsPage() {
           initialSpeed={65}
           selectedSlug={selected?.slug}
           onCardClickScrollTo={() => {
-            document.querySelector('[data-testid="news-center-panel"]')?.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
+            const el = document.querySelector('[data-testid="news-center-panel"]');
+            if (!el) return;
+            const rect = el.getBoundingClientRect();
+            const inView = rect.top >= 0 && rect.top < window.innerHeight * 0.35;
+            if (inView) return;
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
           }}
           onSelect={(a) => setSelected(a)}
         />
