@@ -48,7 +48,7 @@ export default function NewsPage() {
       .filter((x) => x.s > 0)
       .sort((x, y) => y.s - x.s)
       .map((x) => x.a);
-  }, [query]);
+  }, [curated, query]);
 
   const topRail = filtered;
   const bottomRail = filtered;
