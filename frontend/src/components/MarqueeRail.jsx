@@ -137,11 +137,8 @@ export default function MarqueeRail({
   return (
     <div className="space-y-3" data-testid={`${railId}-rail`}>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <div
-          className="text-xs font-medium tracking-wide text-white/70"
-          data-testid={`${railId}-label`}
-        >
-          {railId === "top" ? "Stream A" : "Stream B"}
+        <div className="text-xs font-medium tracking-wide text-white/70" data-testid={`${railId}-label`}>
+          
         </div>
         <div className="flex items-center gap-2" data-testid={`${railId}-controls`}>
           <Button

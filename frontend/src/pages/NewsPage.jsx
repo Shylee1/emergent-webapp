@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import MarqueeRail from "@/components/MarqueeRail";
+import WaitlistDialog from "@/components/WaitlistDialog";
 import articles from "@/data/articles.json";
 
 const YT_NEWS = "https://www.youtube.com/embed/NdvjA5NLREE";
@@ -88,7 +89,7 @@ export default function NewsPage() {
               className="mt-4 text-balance text-3xl font-semibold tracking-tight md:text-4xl"
               data-testid="news-title"
             >
-              The NeurusAGi Signal Stream
+              NeurusAGi News
             </h1>
             <p className="mt-3 text-sm text-white/70" data-testid="news-subtitle">
               Major announcements, one featured video, and the dual-marquee selector. Search between rails,
@@ -142,14 +143,15 @@ export default function NewsPage() {
           onCardClickScrollTo={() => {
             const el = document.querySelector('[data-testid="news-center-panel"]');
             if (!el) return;
-            // Always scroll on select (you chose option 1) so the user sees the expanded content.
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
+            const navOffset = 110;
+            const top = el.getBoundingClientRect().top + window.scrollY - navOffset;
+            window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
           }}
           onSelect={(a) => setSelected(a)}
         />
 
         <Card
-          className="relative overflow-hidden rounded-3xl border-white/10 bg-white/5 p-5 lg:sticky lg:top-[92px] backdrop-blur-xl"
+          className="relative isolate overflow-hidden rounded-3xl border-white/10 bg-black/70 p-5 lg:sticky lg:top-[92px] backdrop-blur-xl"
           data-testid="news-center-panel"
         >
           <div
@@ -204,27 +206,28 @@ export default function NewsPage() {
             </div>
 
             <div className="space-y-2" data-testid="news-expanded-header">
-              <div className="text-xs font-medium tracking-wide text-white/60" data-testid="news-expanded-kicker">
-                Expanded Article
-              </div>
-              <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between">
-                <h3 className="text-xl font-semibold" data-testid="news-expanded-title">
+              <div className="flex flex-col gap-1 md:flex-row md:items-end md:justify-between">
+                <h3 className="text-2xl font-semibold tracking-tight" data-testid="news-expanded-title">
                   {selected?.title ?? "Select an article"}
                 </h3>
-                <div className="text-xs text-white/60" data-testid="news-expanded-meta">
+                <div className="text-xs text-white/70" data-testid="news-expanded-meta">
                   {selected?.dateLabel ? selected.dateLabel : ""}
                 </div>
               </div>
             </div>
 
             <div
-              className="max-h-[420px] overflow-auto rounded-2xl border border-white/10 bg-black/45 p-4 shadow-[inset_0_0_0_1px_rgba(0,122,122,0.22)]"
+              className="max-h-[420px] overflow-auto rounded-2xl border border-white/10 bg-black/50 p-4 shadow-[inset_0_0_0_1px_rgba(0,122,122,0.22)]"
+              style={{ scrollbarColor: "rgba(0,122,122,0.65) rgba(255,255,255,0.08)" }}
               data-testid="news-expanded-scroll"
             >
               {(selected?.full_content ?? "")
-                // Hide any leftover "Sources:" blocks and similar meta that can look like internal notes.
+                // Hide any leftover "Sources:" blocks and similar meta.
                 .split(/\n\nSources:\s*/i)[0]
+                // Strip any repeated title headings inside the body.
+                .replaceAll(String(selected?.title || ""), "")
                 .split("\n\n")
+                .map((x) => x.trim())
                 .filter(Boolean)
                 .map((p, idx) => (
                   <p
@@ -254,8 +257,9 @@ export default function NewsPage() {
           onCardClickScrollTo={() => {
             const el = document.querySelector('[data-testid="news-center-panel"]');
             if (!el) return;
-            // Always scroll on select (you chose option 1) so the user sees the expanded content.
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
+            const navOffset = 110;
+            const top = el.getBoundingClientRect().top + window.scrollY - navOffset;
+            window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
           }}
           onSelect={(a) => setSelected(a)}
         />
