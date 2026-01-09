@@ -85,10 +85,18 @@ export default function SiteLayout() {
         className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
         data-testid="bg-fx"
       >
-        <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-cyan-500/25 blur-[120px]" />
-        <div className="absolute -bottom-40 right-[-120px] h-[560px] w-[560px] rounded-full bg-orange-600/20 blur-[140px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.08),transparent_35%),radial-gradient(circle_at_80%_50%,rgba(234,88,12,0.08),transparent_40%)]" />
-        <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:56px_56px]" />
+        <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full blur-[120px]"
+             style={{ background: "rgba(0,122,122,0.30)" }} />
+        <div className="absolute -bottom-44 right-[-140px] h-[620px] w-[620px] rounded-full blur-[150px]"
+             style={{ background: "rgba(193,154,59,0.20)" }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at 20% 20%, rgba(0,122,122,0.14), transparent 35%), radial-gradient(circle at 78% 55%, rgba(193,154,59,0.12), transparent 42%)",
+          }}
+        />
+        <div className="absolute inset-0 opacity-[0.09] [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:56px_56px]" />
       </div>
 
       <TopNav />
