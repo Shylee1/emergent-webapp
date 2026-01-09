@@ -147,17 +147,7 @@ export default function NewsPage() {
           initialSpeed={70}
           selectedSlug={selected?.slug}
           onCardClickScrollTo={() => {
-            // Stop the page from constantly yanking around.
-            // Only auto-scroll if user is near the top and the panel isn’t already visible.
-            if (window.scrollY > 220) return;
-            const el = document.querySelector('[data-testid="news-center-panel"]');
-            if (!el) return;
-            const rect = el.getBoundingClientRect();
-            const inView = rect.top >= 0 && rect.top < window.innerHeight * 0.45;
-            if (inView) return;
-            const navOffset = 110;
-            const top = rect.top + window.scrollY - navOffset;
-            window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+            // Disable auto-scroll - it causes layout chaos and “content sliding under” effects.
           }}
           onSelect={(a) => setSelected(a)}
         />
@@ -258,17 +248,7 @@ export default function NewsPage() {
           initialSpeed={65}
           selectedSlug={selected?.slug}
           onCardClickScrollTo={() => {
-            // Stop the page from constantly yanking around.
-            // Only auto-scroll if user is near the top and the panel isn’t already visible.
-            if (window.scrollY > 220) return;
-            const el = document.querySelector('[data-testid="news-center-panel"]');
-            if (!el) return;
-            const rect = el.getBoundingClientRect();
-            const inView = rect.top >= 0 && rect.top < window.innerHeight * 0.45;
-            if (inView) return;
-            const navOffset = 110;
-            const top = rect.top + window.scrollY - navOffset;
-            window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+            // Disable auto-scroll - it causes layout chaos and “content sliding under” effects.
           }}
           onSelect={(a) => setSelected(a)}
         />
