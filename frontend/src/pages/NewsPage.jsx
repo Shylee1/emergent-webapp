@@ -89,8 +89,8 @@ export default function NewsPage() {
               The NeurusAGi Signal Stream
             </h1>
             <p className="mt-3 text-sm text-white/70" data-testid="news-subtitle">
-              Featured drops, embedded media, and the dual-marquee selector. Search between rails, pick an
-              article, and expand it instantly.
+              Major announcements, one featured video, and the dual-marquee selector. Search between rails,
+              pick an article, and expand it instantly.
             </p>
 
             <div className="mt-5 space-y-3" data-testid="news-announcement-cards">
