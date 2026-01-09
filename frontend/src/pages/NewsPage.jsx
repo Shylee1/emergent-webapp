@@ -49,8 +49,8 @@ export default function NewsPage() {
       .map((x) => x.a);
   }, [query]);
 
-  const topRail = filtered.filter((a) => a.num % 2 === 1);
-  const bottomRail = filtered.filter((a) => a.num % 2 === 0);
+  const topRail = filtered.filter((_, idx) => idx % 2 === 0);
+  const bottomRail = filtered.filter((_, idx) => idx % 2 === 1);
 
   return (
     <div className="space-y-10" data-testid="news-page">
