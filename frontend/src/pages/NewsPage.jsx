@@ -175,7 +175,7 @@ export default function NewsPage() {
         />
 
         <Card
-          className="relative overflow-hidden rounded-3xl border-white/10 bg-white/5 p-5"
+          className="relative overflow-hidden rounded-3xl border-white/10 bg-white/5 p-5 lg:sticky lg:top-[92px]"
           data-testid="news-center-panel"
         >
           <div
