@@ -98,16 +98,16 @@ export default function NewsPage() {
             <div className="mt-5 space-y-3" data-testid="news-announcement-cards">
               {[
                 {
-                  title: "Announcement Feed",
-                  body: "High-impact updates and milestones. Built for attention, not noise.",
+                  title: "Major announcement",
+                  body: "Primary updates and milestone drops.",
                 },
                 {
-                  title: "Media Embed",
-                  body: "Video drops integrated directly into the news surface.",
+                  title: "Featured video",
+                  body: "Single embed only (per your spec).",
                 },
                 {
-                  title: "Article Intelligence",
-                  body: "Dual marquee streams with interactive control and instant expansion.",
+                  title: "Article selection",
+                  body: "Choose from either marquee and read in the center panel.",
                 },
               ].map((x) => (
                 <Card
