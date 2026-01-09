@@ -30,8 +30,6 @@ export default function NewsPage() {
 
   const [selected, setSelected] = useState(() => defaultSelected);
   // (Graphs are moving to Home; no tabs needed here.)
-  const activeTab = "neur"; // Temporary default until graphs move to Home
-  const setActiveTab = () => {}; // Placeholder function
 
   const curated = useMemo(() => {
     // For now: show all articles we have (skip #17/#21 because you explicitly marked them “skip”).
