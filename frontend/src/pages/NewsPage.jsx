@@ -248,6 +248,8 @@ export default function NewsPage() {
             >
               <div className="prose prose-invert max-w-none prose-p:text-white/80 prose-headings:text-white">
                 {(selected?.full_content ?? "")
+                  // Hide any leftover "Sources:" blocks and similar meta that can look like internal notes.
+                  .split(/\n\nSources:\s*/i)[0]
                   .split("\n\n")
                   .filter(Boolean)
                   .map((p, idx) => (
