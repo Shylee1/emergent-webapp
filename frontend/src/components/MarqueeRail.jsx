@@ -21,6 +21,8 @@ export default function MarqueeRail({
   direction = 1,
   initialSpeed = 55,
   onSelect,
+  selectedSlug,
+  onCardClickScrollTo,
 }) {
   const viewportRef = useRef(null);
   const rafRef = useRef(null);
@@ -34,14 +36,14 @@ export default function MarqueeRail({
   const [isDragging, setIsDragging] = useState(false);
   const dragRef = useRef({ startX: 0, startOffset: 0 });
 
-  const duplicated = useMemo(() => {
+  const { duplicated, repeatCount } = useMemo(() => {
     // Duplicate to create a seamless loop.
-    // Keep it small for performance.
     const base = items || [];
-    const times = base.length < 10 ? 6 : base.length < 18 ? 4 : 3;
+    // Keep enough repeats so the loop always fills and wraps smoothly.
+    const times = base.length < 10 ? 8 : base.length < 18 ? 6 : 4;
     const out = [];
     for (let i = 0; i < times; i += 1) out.push(...base);
-    return out;
+    return { duplicated: out, repeatCount: times };
   }, [items]);
 
   useEffect(() => {
@@ -54,7 +56,16 @@ export default function MarqueeRail({
       lastTsRef.current = ts;
 
       if (isPlaying && !isDragging) {
-        setOffset((prev) => prev + dir * speed * dt);
+        setOffset((prev) => {
+          const next = prev + dir * speed * dt;
+          const track = el.querySelector("[data-marquee-track]");
+          const trackWidth = track?.scrollWidth ?? 0;
+          // Wrap the offset by a single cycle width so it never "ends".
+          const cycleWidth = repeatCount ? trackWidth / repeatCount : trackWidth;
+          if (!cycleWidth || !Number.isFinite(cycleWidth)) return next;
+          const wrapped = ((next % cycleWidth) + cycleWidth) % cycleWidth;
+          return wrapped;
+        });
       }
 
       rafRef.current = requestAnimationFrame(step);
@@ -86,6 +97,11 @@ export default function MarqueeRail({
   const onPointerDown = (e) => {
     const el = viewportRef.current;
     if (!el) return;
+
+    // If the user is clicking a card, do NOT start drag capture - allow normal click.
+    const isOnCard = !!e.target?.closest?.("[data-marquee-card]");
+    if (isOnCard) return;
+
     el.setPointerCapture?.(e.pointerId);
     setIsDragging(true);
     setIsPlaying(false);
@@ -188,12 +204,20 @@ export default function MarqueeRail({
             <button
               key={`${item.slug}-${idx}`}
               type="button"
-              onClick={() => onSelect?.(item)}
+              data-marquee-card
+              onClick={() => {
+                // clone so state always updates reliably
+                onSelect?.({ ...item });
+                onCardClickScrollTo?.();
+              }}
               className={cn(
                 "relative h-24 w-[220px] flex-none overflow-hidden rounded-2xl border border-white/10",
                 "bg-gradient-to-br from-white/10 to-white/5",
                 "text-left transition-transform duration-200 hover:-translate-y-0.5 hover:scale-[1.01]",
                 "shadow-[0_10px_35px_rgba(0,0,0,0.55)]",
+                selectedSlug && item.slug === selectedSlug
+                  ? "ring-2 ring-[rgba(0,122,122,0.65)] shadow-[0_0_0_1px_rgba(0,122,122,0.35),0_18px_70px_rgba(0,0,0,0.45)]"
+                  : "",
               )}
               data-testid={`${railId}-marquee-item-${idx}`}
               aria-label={`Select article ${item.title}`}
