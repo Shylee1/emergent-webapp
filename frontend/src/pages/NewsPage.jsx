@@ -257,7 +257,7 @@ export default function NewsPage() {
                 {selected?.title ?? "None"}
               </div>
               <div className="mt-1 text-xs text-white/60" data-testid="news-selected-sub">
-                {selected ? `Article #${selected.num}` : "Pick an article from the streams"}
+                {selected?.dateLabel ? selected.dateLabel : "Pick an article from the streams"}
               </div>
             </Card>
           </div>
