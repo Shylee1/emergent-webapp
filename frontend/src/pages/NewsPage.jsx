@@ -143,71 +143,13 @@ export default function NewsPage() {
               <div className="aspect-video" data-testid="news-announcements-video-wrapper">
                 <iframe
                   className="h-full w-full"
-                  src={YT_ANNOUNCEMENTS}
+                  src={YT_NEWS}
                   title="NeurusAGi announcement"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                   data-testid="news-announcements-iframe"
                 />
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Main video */}
-      <section className="grid gap-6 lg:grid-cols-5" data-testid="news-main-video-section">
-        <div className="lg:col-span-2" data-testid="news-main-video-copy">
-          <h2 className="text-2xl font-semibold tracking-tight" data-testid="news-main-video-title">
-            Featured Drop
-          </h2>
-          <p className="mt-2 text-sm text-white/70" data-testid="news-main-video-subtitle">
-            Watch the clip, then scan the streams to select an article.
-          </p>
-
-          <div className="mt-4 grid gap-3" data-testid="news-main-video-stats">
-            {["Compute", "Zero-shot", "Evolution"].map((k) => (
-              <Card
-                key={k}
-                className="rounded-2xl border-white/10 bg-white/5 p-4"
-                data-testid={`news-stat-card-${k.toLowerCase()}`}
-              >
-                <div className="text-xs text-white/60" data-testid="news-stat-card-label">
-                  {k}
-                </div>
-                <div className="mt-1 text-sm font-semibold" data-testid="news-stat-card-value">
-                  Report-backed visuals included
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        <div className="lg:col-span-3" data-testid="news-main-video-player">
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/40">
-            <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-              <div className="text-xs font-medium text-white/70" data-testid="news-main-video-label">
-                NeurusAGi: When will AGI be here?
-              </div>
-              <a
-                className="text-xs text-cyan-300/80 hover:text-cyan-200"
-                href="https://www.youtube.com/watch?v=p6K4E1OlxrU"
-                target="_blank"
-                rel="noreferrer"
-                data-testid="news-main-video-open"
-              >
-                Open on YouTube
-              </a>
-            </div>
-            <div className="aspect-video" data-testid="news-main-video-wrapper">
-              <iframe
-                className="h-full w-full"
-                src={YT_MAIN}
-                title="NeurusAGi featured"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                data-testid="news-main-iframe"
-              />
             </div>
           </div>
         </div>
