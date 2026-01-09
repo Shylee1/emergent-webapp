@@ -208,20 +208,20 @@ export default function MarqueeRail({
                         ? "radial-gradient(circle at 70% 30%, rgba(0,155,150,0.22), transparent 55%), linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))"
                         : "radial-gradient(circle at 50% 30%, rgba(193,154,59,0.18), transparent 55%), linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))",
                 }}
-                data-testid={`${railId}-marquee-item-bg-${item.slug}`}
+                data-testid={`${railId}-marquee-item-bg-${idx}`}
               />
               <div className="relative flex h-full flex-col justify-end p-3">
                 <div
                   className="line-clamp-2 text-xs font-semibold leading-snug text-white"
-                  data-testid={`${railId}-marquee-item-title-${item.slug}`}
+                  data-testid={`${railId}-marquee-item-title-${idx}`}
                 >
                   {item.title}
                 </div>
                 <div
                   className="mt-1 text-[11px] text-white/60"
-                  data-testid={`${railId}-marquee-item-meta-${item.slug}`}
+                  data-testid={`${railId}-marquee-item-meta-${idx}`}
                 >
-                  Article #{item.num}
+                  {item.dateLabel ? item.dateLabel : ""}
                 </div>
               </div>
             </button>
