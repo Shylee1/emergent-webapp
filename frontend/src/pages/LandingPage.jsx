@@ -28,7 +28,7 @@ export default function LandingPage() {
               style={{ background: "#007A7A", boxShadow: "0 0 18px rgba(0,122,122,0.95)" }}
               data-testid="landing-badge-dot"
             />
-            NeurusAGi is building toward true general intelligence
+NeurusAGi is artificial general intelligence.
           </div>
 
           <h1
