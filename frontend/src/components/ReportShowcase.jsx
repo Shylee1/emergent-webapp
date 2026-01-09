@@ -95,7 +95,7 @@ export default function ReportShowcase() {
               style={r.id === activeId ? { background: "rgba(0,122,122,0.12)" } : undefined}
               data-testid={`report-tab-${r.id}`}
             >
-              {r.id.startsWith("mega") ? r.id.toUpperCase() : "MMLU"}
+              {r.id === "mmlu" ? "MMLU" : `Part ${r.id.split("-")[1]}` }
             </Button>
           ))}
         </div>
