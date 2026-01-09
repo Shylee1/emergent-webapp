@@ -339,13 +339,12 @@ export default function NewsPage() {
                     ))}
                 </div>
 
-                {selected?.slug?.includes("pending") ? (
+                {selected?.isPosted ? (
                   <div
                     className="mt-4 rounded-2xl border border-white/10 bg-black/30 p-4 text-xs text-white/70"
-                    data-testid="news-expanded-missing-note"
+                    data-testid="news-expanded-posted-note"
                   >
-                    The source file did not include this article’s full text. If you paste Article #{selected.num}
-                    content, I’ll replace this placeholder immediately.
+                    This item is marked as already posted externally and will not appear in the marquee selection.
                   </div>
                 ) : null}
               </div>
