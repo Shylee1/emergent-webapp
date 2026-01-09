@@ -8,8 +8,14 @@ export default function LandingPage() {
     <div className="space-y-10" data-testid="landing-page">
       <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 md:p-12">
         <div className="pointer-events-none absolute inset-0 opacity-70 [mask-image:radial-gradient(circle_at_40%_10%,black,transparent_60%)]">
-          <div className="absolute -top-24 left-10 h-56 w-56 rounded-full bg-cyan-400/25 blur-3xl" />
-          <div className="absolute -bottom-24 right-10 h-56 w-56 rounded-full bg-orange-600/20 blur-3xl" />
+          <div
+            className="absolute -top-24 left-10 h-56 w-56 rounded-full blur-3xl"
+            style={{ background: "rgba(0,122,122,0.28)" }}
+          />
+          <div
+            className="absolute -bottom-24 right-10 h-56 w-56 rounded-full blur-3xl"
+            style={{ background: "rgba(193,154,59,0.18)" }}
+          />
         </div>
 
         <div className="relative">
