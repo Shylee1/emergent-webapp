@@ -147,15 +147,19 @@ export default function NewsPage() {
           onCardClickScrollTo={() => {
             const el = document.querySelector('[data-testid="news-center-panel"]');
             if (!el) return;
+            const rect = el.getBoundingClientRect();
+            // Only scroll if the panel is not already meaningfully visible.
+            const inView = rect.top >= 0 && rect.top < window.innerHeight * 0.45;
+            if (inView) return;
             const navOffset = 110;
-            const top = el.getBoundingClientRect().top + window.scrollY - navOffset;
+            const top = rect.top + window.scrollY - navOffset;
             window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
           }}
           onSelect={(a) => setSelected(a)}
         />
 
         <Card
-          className="relative isolate overflow-hidden rounded-3xl border-white/10 bg-black/70 p-5 lg:sticky lg:top-[92px] backdrop-blur-xl"
+          className="relative isolate overflow-hidden rounded-3xl border-white/10 bg-black/70 p-5 backdrop-blur-xl"
           data-testid="news-center-panel"
         >
           <div
@@ -210,8 +214,8 @@ export default function NewsPage() {
             </div>
 
             <div className="space-y-2" data-testid="news-expanded-header">
-              <div className="flex flex-col gap-1 md:flex-row md:items-end md:justify-between">
-                <h3 className="text-2xl font-semibold tracking-tight" data-testid="news-expanded-title">
+              <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between">
+                <h3 className="text-3xl font-semibold tracking-tight" data-testid="news-expanded-title">
                   {selected?.title ?? "Select an article"}
                 </h3>
                 <div className="text-xs text-white/70" data-testid="news-expanded-meta">
@@ -225,23 +229,49 @@ export default function NewsPage() {
               style={{ scrollbarColor: "rgba(0,122,122,0.65) rgba(255,255,255,0.08)" }}
               data-testid="news-expanded-scroll"
             >
-              {(selected?.full_content ?? "")
-                // Hide any leftover "Sources:" blocks and similar meta.
-                .split(/\n\nSources:\s*/i)[0]
-                // Strip any repeated title headings inside the body.
-                .replaceAll(String(selected?.title || ""), "")
-                .split("\n\n")
-                .map((x) => x.trim())
-                .filter(Boolean)
-                .map((p, idx) => (
-                  <p
-                    key={idx}
-                    className="text-sm leading-relaxed text-white/90"
-                    data-testid={`news-expanded-paragraph-${idx}`}
-                  >
-                    {p}
-                  </p>
-                ))}
+              {(() => {
+                const raw = (selected?.full_content ?? "").split(/\n\nSources:\s*/i)[0];
+                const paras = raw
+                  .split("\n\n")
+                  .map((x) => x.trim())
+                  .filter(Boolean);
+
+                // Remove a repeated title heading if it exists as its own paragraph.
+                const title = String(selected?.title || "").trim();
+                const cleaned = paras.filter((p) => {
+                  if (!title) return true;
+                  const normalized = p.replace(/\s+/g, " ").trim();
+                  return normalized !== title;
+                });
+
+                const deck = cleaned[0] || "";
+                const body = cleaned.slice(1);
+
+                return (
+                  <div className="space-y-4" data-testid="news-expanded-article">
+                    {deck ? (
+                      <p
+                        className="text-sm leading-relaxed text-white/80"
+                        data-testid="news-expanded-deck"
+                      >
+                        {deck}
+                      </p>
+                    ) : null}
+
+                    <div className="h-px bg-white/10" data-testid="news-expanded-divider" />
+
+                    {body.map((p, idx) => (
+                      <p
+                        key={idx}
+                        className="text-sm leading-relaxed text-white/90"
+                        data-testid={`news-expanded-paragraph-${idx}`}
+                      >
+                        {p}
+                      </p>
+                    ))}
+                  </div>
+                );
+              })()}
 
               {!selected?.full_content ? (
                 <div className="text-sm text-white/70" data-testid="news-expanded-empty">
@@ -261,8 +291,12 @@ export default function NewsPage() {
           onCardClickScrollTo={() => {
             const el = document.querySelector('[data-testid="news-center-panel"]');
             if (!el) return;
+            const rect = el.getBoundingClientRect();
+            // Only scroll if the panel is not already meaningfully visible.
+            const inView = rect.top >= 0 && rect.top < window.innerHeight * 0.45;
+            if (inView) return;
             const navOffset = 110;
-            const top = el.getBoundingClientRect().top + window.scrollY - navOffset;
+            const top = rect.top + window.scrollY - navOffset;
             window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
           }}
           onSelect={(a) => setSelected(a)}
