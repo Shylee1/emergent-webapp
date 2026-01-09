@@ -323,7 +323,6 @@ export default function NewsPage() {
                   {(selected?.full_content ?? "")
                     .split("\n\n")
                     .filter(Boolean)
-                    .slice(0, 12)
                     .map((p, idx) => (
                       <p key={idx} data-testid={`news-expanded-paragraph-${idx}`}>
                         {p}
@@ -331,13 +330,13 @@ export default function NewsPage() {
                     ))}
                 </div>
 
-                {selected?.full_content && selected.full_content.split("\n\n").length > 12 ? (
+                {selected?.slug?.includes("pending") ? (
                   <div
                     className="mt-4 rounded-2xl border border-white/10 bg-black/30 p-4 text-xs text-white/70"
-                    data-testid="news-expanded-truncation-note"
+                    data-testid="news-expanded-missing-note"
                   >
-                    Showing the first 12 paragraphs for now. The full article view and publishing controls
-                    will be expanded in the next milestone.
+                    The source file did not include this article’s full text. If you paste Article #{selected.num}
+                    content, I’ll replace this placeholder immediately.
                   </div>
                 ) : null}
               </div>
