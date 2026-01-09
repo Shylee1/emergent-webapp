@@ -131,7 +131,7 @@ export default function NewsPage() {
                   Featured Announcement
                 </div>
                 <a
-                  className="text-xs text-cyan-300/80 hover:text-cyan-200"
+                  className="text-xs text-white/70 hover:text-white"
                   href="https://www.youtube.com/watch?v=NdvjA5NLREE"
                   target="_blank"
                   rel="noreferrer"
