@@ -155,10 +155,10 @@ export default function NewsPage() {
           data-testid="news-center-panel"
         >
           <div
-            className="pointer-events-none absolute inset-0 opacity-70"
+            className="pointer-events-none absolute inset-0 -z-10 opacity-80"
             style={{
               background:
-                "radial-gradient(circle at 30% 20%, rgba(0,122,122,0.14), transparent 45%), radial-gradient(circle at 80% 70%, rgba(193,154,59,0.10), transparent 50%)",
+                "radial-gradient(circle at 30% 20%, rgba(0,122,122,0.18), transparent 46%), radial-gradient(circle at 80% 70%, rgba(193,154,59,0.14), transparent 52%)",
             }}
           />
 
@@ -219,21 +219,29 @@ export default function NewsPage() {
             </div>
 
             <div
-              className="max-h-[420px] overflow-auto rounded-2xl border border-white/10 bg-black/35 p-4 shadow-[inset_0_0_0_1px_rgba(0,122,122,0.18)]"
+              className="max-h-[420px] overflow-auto rounded-2xl border border-white/10 bg-black/45 p-4 shadow-[inset_0_0_0_1px_rgba(0,122,122,0.22)]"
               data-testid="news-expanded-scroll"
             >
-              <div className="prose prose-invert max-w-none prose-p:text-white/80 prose-headings:text-white">
-                {(selected?.full_content ?? "")
-                  // Hide any leftover "Sources:" blocks and similar meta that can look like internal notes.
-                  .split(/\n\nSources:\s*/i)[0]
-                  .split("\n\n")
-                  .filter(Boolean)
-                  .map((p, idx) => (
-                    <p key={idx} data-testid={`news-expanded-paragraph-${idx}`}>
-                      {p}
-                    </p>
-                  ))}
-              </div>
+              {(selected?.full_content ?? "")
+                // Hide any leftover "Sources:" blocks and similar meta that can look like internal notes.
+                .split(/\n\nSources:\s*/i)[0]
+                .split("\n\n")
+                .filter(Boolean)
+                .map((p, idx) => (
+                  <p
+                    key={idx}
+                    className="text-sm leading-relaxed text-white/90"
+                    data-testid={`news-expanded-paragraph-${idx}`}
+                  >
+                    {p}
+                  </p>
+                ))}
+
+              {!selected?.full_content ? (
+                <div className="text-sm text-white/70" data-testid="news-expanded-empty">
+                  No article content loaded.
+                </div>
+              ) : null}
             </div>
           </div>
         </Card>
