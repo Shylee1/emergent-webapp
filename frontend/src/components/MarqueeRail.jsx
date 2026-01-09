@@ -195,7 +195,7 @@ export default function MarqueeRail({
                 "text-left transition-transform duration-200 hover:-translate-y-0.5 hover:scale-[1.01]",
                 "shadow-[0_10px_35px_rgba(0,0,0,0.55)]",
               )}
-              data-testid={`${railId}-marquee-item-${item.slug}`}
+              data-testid={`${railId}-marquee-item-${idx}`}
               aria-label={`Select article ${item.title}`}
             >
               <div
