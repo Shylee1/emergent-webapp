@@ -118,7 +118,7 @@ export default function MarqueeRail({
           className="text-xs font-medium tracking-wide text-white/70"
           data-testid={`${railId}-label`}
         >
-          {railId === "top" ? "Primary stream" : "Secondary stream"}
+          {railId === "top" ? "Stream A" : "Stream B"}
         </div>
         <div className="flex items-center gap-2" data-testid={`${railId}-controls`}>
           <Button
