@@ -74,7 +74,7 @@ NeurusAGi is artificial general intelligence.
           },
           {
             title: "Signal > Noise",
-            body: "Announcements, embedded media, and article intelligence—designed for impact.",
+            body: "Announcements, embedded media, and article intelligence - designed for impact.",
           },
         ].map((f) => (
           <Card
