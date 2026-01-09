@@ -1,4 +1,6 @@
 import React, { useMemo, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -145,10 +147,12 @@ export default function NewsPage() {
           initialSpeed={70}
           selectedSlug={selected?.slug}
           onCardClickScrollTo={() => {
+            // Stop the page from constantly yanking around.
+            // Only auto-scroll if user is near the top and the panel isn’t already visible.
+            if (window.scrollY > 220) return;
             const el = document.querySelector('[data-testid="news-center-panel"]');
             if (!el) return;
             const rect = el.getBoundingClientRect();
-            // Only scroll if the panel is not already meaningfully visible.
             const inView = rect.top >= 0 && rect.top < window.innerHeight * 0.45;
             if (inView) return;
             const navOffset = 110;
@@ -159,7 +163,7 @@ export default function NewsPage() {
         />
 
         <Card
-          className="relative isolate overflow-hidden rounded-3xl border-white/10 bg-black/70 p-5 backdrop-blur-xl"
+          className="relative isolate overflow-hidden rounded-3xl border-white/10 bg-black/85 p-5 backdrop-blur-xl"
           data-testid="news-center-panel"
         >
           <div
@@ -225,59 +229,24 @@ export default function NewsPage() {
             </div>
 
             <div
-              className="max-h-[420px] overflow-auto rounded-2xl border border-white/10 bg-black/50 p-4 shadow-[inset_0_0_0_1px_rgba(0,122,122,0.22)]"
-              style={{ scrollbarColor: "rgba(0,122,122,0.65) rgba(255,255,255,0.08)" }}
+              className="max-h-[460px] overflow-auto rounded-2xl border border-white/10 bg-black/90 p-5 shadow-[inset_0_0_0_1px_rgba(0,122,122,0.22)]"
+              style={{ scrollbarColor: "rgba(0,122,122,0.70) rgba(255,255,255,0.08)" }}
               data-testid="news-expanded-scroll"
             >
-              {(() => {
-                const raw = (selected?.full_content ?? "").split(/\n\nSources:\s*/i)[0];
-                const paras = raw
-                  .split("\n\n")
-                  .map((x) => x.trim())
-                  .filter(Boolean);
-
-                // Remove a repeated title heading if it exists as its own paragraph.
-                const title = String(selected?.title || "").trim();
-                const cleaned = paras.filter((p) => {
-                  if (!title) return true;
-                  const normalized = p.replace(/\s+/g, " ").trim();
-                  return normalized !== title;
-                });
-
-                const deck = cleaned[0] || "";
-                const body = cleaned.slice(1);
-
-                return (
-                  <div className="space-y-4" data-testid="news-expanded-article">
-                    {deck ? (
-                      <p
-                        className="text-sm leading-relaxed text-white/80"
-                        data-testid="news-expanded-deck"
-                      >
-                        {deck}
-                      </p>
-                    ) : null}
-
-                    <div className="h-px bg-white/10" data-testid="news-expanded-divider" />
-
-                    {body.map((p, idx) => (
-                      <p
-                        key={idx}
-                        className="text-sm leading-relaxed text-white/90"
-                        data-testid={`news-expanded-paragraph-${idx}`}
-                      >
-                        {p}
-                      </p>
-                    ))}
-                  </div>
-                );
-              })()}
-
-              {!selected?.full_content ? (
+              {selected ? (
+                <div
+                  className="prose prose-invert max-w-none prose-p:text-white/90 prose-p:leading-relaxed prose-headings:text-white prose-a:text-[rgba(0,122,122,0.95)]"
+                  data-testid="news-expanded-markdown"
+                >
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {`# ${selected.title}\n\n*${selected.dateLabel || ""}*\n\n${selected.full_content || ""}`}
+                  </ReactMarkdown>
+                </div>
+              ) : (
                 <div className="text-sm text-white/70" data-testid="news-expanded-empty">
                   No article content loaded.
                 </div>
-              ) : null}
+              )}
             </div>
           </div>
         </Card>
@@ -289,10 +258,12 @@ export default function NewsPage() {
           initialSpeed={65}
           selectedSlug={selected?.slug}
           onCardClickScrollTo={() => {
+            // Stop the page from constantly yanking around.
+            // Only auto-scroll if user is near the top and the panel isn’t already visible.
+            if (window.scrollY > 220) return;
             const el = document.querySelector('[data-testid="news-center-panel"]');
             if (!el) return;
             const rect = el.getBoundingClientRect();
-            // Only scroll if the panel is not already meaningfully visible.
             const inView = rect.top >= 0 && rect.top < window.innerHeight * 0.45;
             if (inView) return;
             const navOffset = 110;
