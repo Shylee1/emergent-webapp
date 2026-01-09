@@ -23,7 +23,7 @@ function scoreMatch(haystack, needle) {
 
 export default function NewsPage() {
   const [query, setQuery] = useState("");
-  const [selected, setSelected] = useState(() => articles?.[0] ?? null);
+  const [selected, setSelected] = useState(() => (Array.isArray(articles) ? articles?.find((a) => !a.isPosted) : null) ?? null);
   const [activeTab, setActiveTab] = useState("neur");
 
   // Exclude articles that are marked as already posted.
