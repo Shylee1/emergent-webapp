@@ -157,10 +157,10 @@ export default function NewsPage() {
           data-testid="news-center-panel"
         >
           <div
-            className="pointer-events-none absolute inset-0 z-0 opacity-80"
+            className="pointer-events-none absolute inset-0 z-0 opacity-35"
             style={{
               background:
-                "radial-gradient(circle at 30% 20%, rgba(0,122,122,0.18), transparent 46%), radial-gradient(circle at 80% 70%, rgba(193,154,59,0.14), transparent 52%)",
+                "radial-gradient(circle at 30% 20%, rgba(0,122,122,0.16), transparent 52%), radial-gradient(circle at 80% 70%, rgba(193,154,59,0.12), transparent 58%)",
             }}
           />
 
@@ -224,11 +224,36 @@ export default function NewsPage() {
               data-testid="news-expanded-scroll"
             >
               {selected ? (
-                <div
-                  className="prose prose-invert max-w-none prose-p:text-white/90 prose-p:leading-relaxed prose-headings:text-white prose-a:text-[rgba(0,122,122,0.95)]"
-                  data-testid="news-expanded-markdown"
-                >
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                <div className="" data-testid="news-expanded-markdown">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      h1: ({ children }) => (
+                        <h1 className="m-0 text-3xl font-semibold tracking-tight text-white">{children}</h1>
+                      ),
+                      p: ({ children }) => (
+                        <p className="m-0 text-[15px] leading-7 text-white/90">{children}</p>
+                      ),
+                      em: ({ children }) => (
+                        <em className="not-italic text-xs text-white/65">{children}</em>
+                      ),
+                      a: ({ children, href }) => (
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[rgba(0,122,122,0.95)] underline underline-offset-4"
+                        >
+                          {children}
+                        </a>
+                      ),
+                      hr: () => <div className="my-4 h-px w-full bg-white/10" />,
+                      ul: ({ children }) => (
+                        <ul className="m-0 list-disc space-y-2 pl-5 text-[15px] leading-7 text-white/90">{children}</ul>
+                      ),
+                      li: ({ children }) => <li className="m-0">{children}</li>,
+                    }}
+                  >
                     {`# ${selected.title}\n\n*${selected.dateLabel || ""}*\n\n${selected.full_content || ""}`}
                   </ReactMarkdown>
                 </div>
