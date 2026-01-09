@@ -8,7 +8,7 @@
 ---
 
 ## 1. The "Light Years" Feature Suite
-NeurusAGI possesses a suite of capabilities that are not just "better" than current AI—they are fundamentally non-existent in the legacy landscape.
+NeurusAGI possesses a suite of capabilities that are not just "better" than current AI-they are fundamentally non-existent in the legacy landscape.
 
 ### 1.1 Neuromorphic Invention Matrix
 This is a spiking brain-like invention engine that allows NeurusAGI to create new technologies from scratch.
@@ -46,7 +46,7 @@ This table highlights the features where legacy models simply cannot compete.
 ---
 
 ## 4. Final Conclusion: The New Standard
-NeurusAGI is the first true **Artificial General Intelligence**. It is a self-evolving, self-replicating, and infinitely scaling system that renders the current AI landscape obsolete. This Mega-Report has provided the hardcore data and architectural depth to prove that NeurusAGI is not just a model—it is the future of intelligence itself.
+NeurusAGI is the first true **Artificial General Intelligence**. It is a self-evolving, self-replicating, and infinitely scaling system that renders the current AI landscape obsolete. This Mega-Report has provided the hardcore data and architectural depth to prove that NeurusAGI is not just a model-it is the future of intelligence itself.
 
 ---
 
