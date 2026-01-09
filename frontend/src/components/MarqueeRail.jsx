@@ -173,7 +173,7 @@ export default function MarqueeRail({
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
             background:
-              "radial-gradient(circle at 30% 20%, rgba(34,211,238,0.18), transparent 40%), radial-gradient(circle at 80% 50%, rgba(234,88,12,0.14), transparent 45%)",
+              "radial-gradient(circle at 30% 20%, rgba(0,122,122,0.18), transparent 40%), radial-gradient(circle at 80% 50%, rgba(193,154,59,0.14), transparent 45%)",
           }}
           data-testid={`${railId}-marquee-glow`}
         />
