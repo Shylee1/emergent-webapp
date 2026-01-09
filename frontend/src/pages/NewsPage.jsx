@@ -54,7 +54,7 @@ export default function NewsPage() {
           className="pointer-events-none absolute inset-0 opacity-70"
           style={{
             background:
-              "radial-gradient(circle at 18% 22%, rgba(34,211,238,0.18), transparent 45%), radial-gradient(circle at 85% 30%, rgba(234,88,12,0.14), transparent 48%)",
+              "radial-gradient(circle at 18% 22%, rgba(0,122,122,0.20), transparent 45%), radial-gradient(circle at 85% 30%, rgba(193,154,59,0.14), transparent 48%)",
           }}
         />
 
