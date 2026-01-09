@@ -98,9 +98,6 @@ async def get_waitlist_count():
     count = await db.waitlist.count_documents({})
     return {"count": count}
 
-    v = re.sub(r"[\x00-\x1F\x7F]", "", v)
-    v = v.strip()
-    return v[:max_len]
 
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
