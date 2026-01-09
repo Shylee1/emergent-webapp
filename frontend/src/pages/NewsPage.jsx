@@ -269,15 +269,20 @@ export default function NewsPage() {
 
             <div className="mt-5 grid gap-5 lg:grid-cols-5" data-testid="news-expanded-body">
               <div className="lg:col-span-3" data-testid="news-expanded-text">
-                <div className="prose prose-invert max-w-none prose-p:text-white/80 prose-headings:text-white">
-                  {(selected?.full_content ?? "")
-                    .split("\n\n")
-                    .filter(Boolean)
-                    .map((p, idx) => (
-                      <p key={idx} data-testid={`news-expanded-paragraph-${idx}`}>
-                        {p}
-                      </p>
-                    ))}
+                <div
+                  className="max-h-[420px] overflow-auto rounded-2xl border border-white/10 bg-black/20 p-4"
+                  data-testid="news-expanded-scroll"
+                >
+                  <div className="prose prose-invert max-w-none prose-p:text-white/80 prose-headings:text-white">
+                    {(selected?.full_content ?? "")
+                      .split("\n\n")
+                      .filter(Boolean)
+                      .map((p, idx) => (
+                        <p key={idx} data-testid={`news-expanded-paragraph-${idx}`}>
+                          {p}
+                        </p>
+                      ))}
+                  </div>
                 </div>
 
                 {selected?.isPosted ? (
