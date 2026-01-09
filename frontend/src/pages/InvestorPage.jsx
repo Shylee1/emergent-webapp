@@ -19,7 +19,7 @@ export default function InvestorPage() {
       <Card className="overflow-hidden rounded-2xl border-white/10 bg-black/40" data-testid="investor-video-card">
         <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
           <div className="text-xs font-medium text-white/70" data-testid="investor-video-label">
-            NeurusAGi — Investor context
+            NeurusAGi - Investor context
           </div>
           <a
             className="text-xs text-white/70 hover:text-white"
