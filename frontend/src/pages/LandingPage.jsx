@@ -65,22 +65,22 @@ NeurusAGi is artificial general intelligence.
       <section className="grid gap-4 md:grid-cols-3" data-testid="landing-feature-grid">
         {[
           {
-            title: "Immersive",
-            body: "Black + cyan + rusty glow. Depth, motion, and presence without gimmicks.",
+            title: "True cognition",
+            body: "Reasoning, memory, task execution, and discovery - not a chatbot.",
           },
           {
-            title: "Global-Ready",
-            body: "Structured for worldwide rollout and scalable compliance onboarding.",
+            title: "Portable + secure",
+            body: "Designed to avoid the centralized scaling trap and fragile dependencies.",
           },
           {
-            title: "Signal > Noise",
-            body: "Announcements, embedded media, and article intelligence - designed for impact.",
+            title: "Enterprise impact",
+            body: "Penetrates every industry and every consumer use case - total market penetration.",
           },
         ].map((f) => (
           <Card
             key={f.title}
             className="rounded-2xl border-white/10 bg-white/5 p-5"
-            data-testid={`landing-feature-${f.title.toLowerCase()}`}
+            data-testid={`landing-feature-${f.title.toLowerCase().replace(/\s+/g, "-")}`}
           >
             <div className="text-sm font-semibold text-white" data-testid="landing-feature-title">
               {f.title}
