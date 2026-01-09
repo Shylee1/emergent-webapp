@@ -200,6 +200,11 @@ export default function NewsPage() {
               <div className="mt-1 text-xs text-white/60" data-testid="news-selected-sub">
                 {selected?.dateLabel ? selected.dateLabel : "Pick an article from the streams"}
               </div>
+              {selected?.isPosted ? (
+                <div className="mt-2 text-xs text-white/60" data-testid="news-selected-posted-flag">
+                  Marked as posted externally.
+                </div>
+              ) : null}
             </Card>
           </div>
         </div>
