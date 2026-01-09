@@ -23,7 +23,11 @@ export default function LandingPage() {
             className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-xs text-white/80"
             data-testid="landing-badge"
           >
-            <span className="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_16px_rgba(34,211,238,0.9)]" />
+            <span
+              className="h-2 w-2 rounded-full"
+              style={{ background: "#007A7A", boxShadow: "0 0 18px rgba(0,122,122,0.95)" }}
+              data-testid="landing-badge-dot"
+            />
             NeurusAGi is building toward true general intelligence
           </div>
 
