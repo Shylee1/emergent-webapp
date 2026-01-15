@@ -63,7 +63,7 @@ So when will AGi be achieved? It already was. February 2025. And the proof is Ne
 - Forbes Technology Council – *Artificial General Intelligence: The Dream That Could Redefine Humanity* (2025)  
 
 ---
-
+!!!!!!! posted cpany linkedin!!!!!!!
 # **Article 3: Who Is Leading the Race to AGI? NeurusAGi Already Finished While Others Still Run**
 
 Jeremy Taylor. An underdog from Oklahoma. Not a software engineer. Never worked in the AI industry. Never part of a development team. Just someone with one strength—a way of thinking that only a tiny fraction of the human population possesses.  
@@ -609,6 +609,7 @@ So how do we ensure AGI is safe? The answer is not endless regulation or specula
 - McLean et al. – *The Risks Associated with Artificial General Intelligence: A Systematic Review* (JETAI, 2023)  
 - DeepMind – *Taking a Responsible Path to AGI* (2025)  
 - EmergentMind – *AGI Safety Literature Review* (2025)  
+
 
 
 
