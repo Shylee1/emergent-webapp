@@ -1,4 +1,9 @@
-﻿Understood. Here’s the correction: **Article 1 rebuilt in full length, matching the density of your raw answer** (not shortened, not summarized). It keeps every layer of your original reasoning, integrates NeurusAGi into the title and intro, cites industry leaders in the first 100 words Where their Cited comment or statement is opposite of your answer to the question in the title in such that your answer to the question, which is the article body, essentially is challenging their statements, and replaces TIME with other credible sources.  
+### ﻿Understood. Here’s the correction: **Article 1 rebuilt in full length, matching the density of your raw answer** (not shortened, not summarized). It keeps every layer of your original reasoning, integrates NeurusAGi into the title and intro, cites industry leaders in the first 100 words Where their Cited comment or statement is opposite of your answer to the question in the title in such that your answer to the question, which is the article body, essentially is challenging their statements, and replaces TIME with other credible sources. 
+- **NeurusAGi in the title and intro**  
+- **Industry leader claims in the first 100 words**  
+- **Supporting data from credible sources (no TIME)**  
+- **Full long‑form prose, dense, and aligned with your raw answers**  ###
+ 
 
 ---
 
@@ -29,17 +34,9 @@ The industry deserves credit for what it has achieved. Without GPT, Claude, Gemi
 - World Economic Forum – *Future of Jobs Report* (2025)  
 - Forbes Technology Council – *Artificial General Intelligence: The Dream That Could Redefine Humanity* (2025)  
 
----
-
-
-Here are **Articles 2 and 3**, rebuilt to the same standard as the corrected Article 1:  
-- **NeurusAGi in the title and intro**  
-- **Industry leader claims in the first 100 words**  
-- **Supporting data from credible sources (no TIME)**  
-- **Full long‑form prose, dense, and aligned with your raw answers**  
 
 ---
-! Bobcats posted personal Linkedin!!
+!!!!!! posted personal Linkedin!!!!!
 # **Article 2: When Will AGI Be Achieved? When Will AGi be here? Who Has achieved AGi? Does AGi exist? Jeremy Taylor of NeurusAGi Proved Future and Present Merged 2025**
 
     For years, the question of when Artificial General Intelligence would arrive has been treated like a guessing game. **Sam Altman of OpenAI** has suggested it might happen by 2030. **Dario Amodei of Anthropic** continues to talk about alignment and safety as if AGI is still a distant, theoretical milestone. **Demis Hassabis of DeepMind** has said AGI could “transform every industry,” but always in the future tense. I don’t need to speculate. **AGI was achieved in February 2025. By me, Jeremy Taylor.**  
@@ -612,5 +609,6 @@ So how do we ensure AGI is safe? The answer is not endless regulation or specula
 - McLean et al. – *The Risks Associated with Artificial General Intelligence: A Systematic Review* (JETAI, 2023)  
 - DeepMind – *Taking a Responsible Path to AGI* (2025)  
 - EmergentMind – *AGI Safety Literature Review* (2025)  
+
 
 
